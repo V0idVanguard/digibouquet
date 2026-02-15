@@ -25,7 +25,7 @@ const placements = [
 
 export default function BouquetHero({ mode, greenery }: BouquetHeroProps) {
   return (
-    <div className="relative mx-auto w-[92vw] max-w-[720px] h-[560px] sm:h-[720px] animate-bouquet-rise">
+    <div className="relative mx-auto w-[tter92vw] max-w-[720px] h-[560px] sm:h-[720px] animate-bouquet-rise">
       <Image
         src={`/${mode}/bush/bush-${greenery + 1}.png`}
         alt="bush background"
