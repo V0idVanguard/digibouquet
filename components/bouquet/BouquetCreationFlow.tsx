@@ -25,7 +25,14 @@ export default function BouquetCreationFlow() {
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0)); // Move backward, but don't go below 0
 
   return (
-    <main className="container flex flex-col p-4 mx-auto">
+    <main
+      className="container flex min-h-screen flex-col p-4 mx-auto"
+      style={{
+        backgroundImage: `linear-gradient(180deg, ${
+          bouquet.letter.cardColor || "#ffffff"
+        } 0%, #ffffff 100%)`,
+      }}
+    >
       {/* Logo/Branding */}
       <Link href="/">
         <Image

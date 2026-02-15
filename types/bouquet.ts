@@ -22,6 +22,11 @@ export interface BouquetLetter {
   sender: string;
   recipient: string;
   message: ReactNode;
+  title?: string;
+  songTitle?: string;
+  songUrl?: string;
+  songPlatform?: "auto" | "youtube" | "spotify" | "soundcloud";
+  cardColor?: string;
   font?: string;
 }
 

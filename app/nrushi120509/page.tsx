@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Bouquet from "@/components/bouquet/Bouquet";
 import BouquetHero from "@/components/bouquet/BouquetHero";
+import BouquetMusicPlayer from "@/components/bouquet/BouquetMusicPlayer";
 
-const videoId = "VjipUXcbGKA";
+const songUrl = "https://www.youtube.com/watch?v=VjipUXcbGKA";
 
 const letterMessage = (
   <>
@@ -58,9 +58,6 @@ const bouquet = {
 };
 
 export default function LovePage() {
-  const [soundOn, setSoundOn] = useState(false);
-  const playerSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&mute=${soundOn ? 0 : 1}&controls=0&modestbranding=1&playsinline=1`;
-
   return (
     <div className="min-h-screen overflow-x-hidden bg-gradient-to-b from-[#f2f7ff] via-[#eaf2ff] to-[#e0ecff] text-[#1d1d1d]">
       <div className="mx-auto max-w-5xl px-6 py-12">
@@ -80,17 +77,11 @@ export default function LovePage() {
             <Bouquet bouquet={bouquet} hideFlowers />
           </div>
           <div className="text-center">
-            <button
-              onClick={() => setSoundOn(true)}
-              className="px-4 py-2 text-sm uppercase border border-black"
-              disabled={soundOn}
-            >
-              {soundOn ? "Sound On" : "Enable Sound"}
-            </button>
+            <BouquetMusicPlayer songUrl={songUrl} songPlatform="youtube" />
             <p className="mt-3 text-xs text-gray-600">
-              Baby, if the song is muted... tap enable sound or open it on{" "}
+              If audio does not auto-play, tap the play button or open it on{" "}
               <a
-                href={`https://www.youtube.com/watch?v=${videoId}`}
+                href={songUrl}
                 className="underline"
                 target="_blank"
                 rel="noreferrer"
@@ -102,14 +93,6 @@ export default function LovePage() {
           </div>
         </div>
       </div>
-
-      <iframe
-        key={soundOn ? "sound-on" : "sound-off"}
-        title="Love song"
-        src={playerSrc}
-        allow="autoplay; encrypted-media"
-        className="absolute w-[1px] h-[1px] opacity-0 pointer-events-none"
-      />
     </div>
   );
 }

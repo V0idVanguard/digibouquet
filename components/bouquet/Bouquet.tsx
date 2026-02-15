@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { flowers } from "../../data/data";
 import type { BouquetReadOnlyProps } from "@/types/bouquet";
+import BouquetMusicPlayer from "./BouquetMusicPlayer";
 
 const fontClassMap: Record<string, string> = {
   martian: "font-martian",
@@ -133,9 +134,15 @@ export default function Bouquet({ bouquet, hideFlowers }: BouquetReadOnlyProps) 
         <div>
           {/* White card container with black border */}
           <div
-            className={`bg-white border-[1.5px] border-black p-8 mx-auto -translate-y-[50px] -rotate-2 hover:-rotate-2 transition-all duration-300 ${fontClass}`}
+            className={`border-[1.5px] border-black p-8 mx-auto -translate-y-[50px] -rotate-2 hover:-rotate-2 transition-all duration-300 ${fontClass}`}
+            style={{ backgroundColor: bouquet.letter.cardColor || "#ffffff" }}
           >
             <div className="space-y-4">
+              {bouquet.letter.title ? (
+                <p className="text-left font-semibold uppercase tracking-wide">
+                  {bouquet.letter.title}
+                </p>
+              ) : null}
               <div className="flex flex-row gap-2 items-start justify-start">
                 <p className="bg-transparent border-none focus:outline-none focus:ring-0">
                   Dear {bouquet.letter.recipient}
@@ -156,6 +163,11 @@ export default function Bouquet({ bouquet, hideFlowers }: BouquetReadOnlyProps) 
               </div>
             </div>
           </div>
+          <BouquetMusicPlayer
+            songUrl={bouquet.letter.songUrl}
+            songPlatform={bouquet.letter.songPlatform}
+            songTitle={bouquet.letter.songTitle}
+          />
         </div>
       </div>
     </div>

@@ -1,9 +1,22 @@
 import Image from "next/image";
 import { useBouquet } from "../../context/BouquetContext";
+import BouquetMusicPlayer from "../bouquet/BouquetMusicPlayer";
+
+const colorPalette = [
+  "#ffffff",
+  "#fff7e6",
+  "#fdf2f8",
+  "#eef2ff",
+  "#ecfeff",
+  "#f0fdf4",
+  "#fef2f2",
+  "#f4f4f5",
+];
 
 export default function CardWriter() {
   const { bouquet, setBouquet } = useBouquet();
-  const messageValue = typeof bouquet.letter.message === "string" ? bouquet.letter.message : "";
+  const messageValue =
+    typeof bouquet.letter.message === "string" ? bouquet.letter.message : "";
   const fontOptions = [
     { value: "martian", label: "Martian Mono" },
     { value: "playfair", label: "Playfair Display" },
@@ -44,6 +57,120 @@ export default function CardWriter() {
             ))}
           </select>
         </div>
+        <div className="mx-auto mb-8 flex max-w-lg flex-col gap-3 text-left text-sm">
+          <label htmlFor="card-title" className="uppercase">
+            Card title
+          </label>
+          <input
+            id="card-title"
+            value={bouquet.letter.title || ""}
+            onChange={(e) =>
+              setBouquet((prev) => ({
+                ...prev,
+                letter: {
+                  ...prev.letter,
+                  title: e.target.value,
+                },
+              }))
+            }
+            placeholder="For You"
+            className="border border-black bg-white px-3 py-2"
+          />
+
+          <label htmlFor="song-url" className="uppercase">
+            Song URL (YouTube / Spotify / SoundCloud)
+          </label>
+          <input
+            id="song-url"
+            value={bouquet.letter.songUrl || ""}
+            onChange={(e) =>
+              setBouquet((prev) => ({
+                ...prev,
+                letter: {
+                  ...prev.letter,
+                  songUrl: e.target.value,
+                },
+              }))
+            }
+            placeholder="Paste song link"
+            className="border border-black bg-white px-3 py-2"
+          />
+
+          <label htmlFor="song-title" className="uppercase">
+            Song title (optional)
+          </label>
+          <input
+            id="song-title"
+            value={bouquet.letter.songTitle || ""}
+            onChange={(e) =>
+              setBouquet((prev) => ({
+                ...prev,
+                letter: {
+                  ...prev.letter,
+                  songTitle: e.target.value,
+                },
+              }))
+            }
+            placeholder="Song title"
+            className="border border-black bg-white px-3 py-2"
+          />
+
+          <label htmlFor="song-platform" className="uppercase">
+            Song platform
+          </label>
+          <select
+            id="song-platform"
+            value={bouquet.letter.songPlatform || "auto"}
+            onChange={(e) =>
+              setBouquet((prev) => ({
+                ...prev,
+                letter: {
+                  ...prev.letter,
+                  songPlatform: e.target.value as
+                    | "auto"
+                    | "youtube"
+                    | "spotify"
+                    | "soundcloud",
+                },
+              }))
+            }
+            className="border border-black bg-white px-3 py-2"
+          >
+            <option value="auto">Auto detect</option>
+            <option value="youtube">YouTube</option>
+            <option value="spotify">Spotify</option>
+            <option value="soundcloud">SoundCloud</option>
+          </select>
+
+          <p className="uppercase">Card background color</p>
+          <div className="flex flex-wrap gap-2">
+            {colorPalette.map((color) => (
+              <button
+                key={color}
+                type="button"
+                onClick={() =>
+                  setBouquet((prev) => ({
+                    ...prev,
+                    letter: {
+                      ...prev.letter,
+                      cardColor: color,
+                    },
+                  }))
+                }
+                className={`h-8 w-8 border border-black ${
+                  bouquet.letter.cardColor === color ? "ring-2 ring-black" : ""
+                }`}
+                style={{ backgroundColor: color }}
+                aria-label={`Pick ${color} card color`}
+              />
+            ))}
+          </div>
+          <BouquetMusicPlayer
+            songUrl={bouquet.letter.songUrl}
+            songPlatform={bouquet.letter.songPlatform}
+            songTitle={bouquet.letter.songTitle}
+          />
+        </div>
         <div className="flex flex-row items-center justify-center">
           {/* White card container with black border */}
           <div className="flex flex-row items-center justify-center -space-x-12">
@@ -71,9 +198,15 @@ export default function CardWriter() {
           </div>
 
           <div
-            className={`bg-white border-2 border-black p-10 max-w-lg mx-10 ${fontClass}`}
+            className={`border-2 border-black p-10 max-w-lg mx-10 ${fontClass}`}
+            style={{ backgroundColor: bouquet.letter.cardColor || "#ffffff" }}
           >
             <div className="space-y-4">
+              {bouquet.letter.title ? (
+                <p className="text-left font-semibold uppercase tracking-wide">
+                  {bouquet.letter.title}
+                </p>
+              ) : null}
               <div className="flex flex-row items-left justify-left gap-2">
                 <label htmlFor="recipient">Dear </label>
                 <input

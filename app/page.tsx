@@ -38,22 +38,24 @@ export default function Home() {
           >
             BUILD IT IN BLACK AND WHITE
           </Link>
-          <Link
-            href="/garden"
-            className="text-sm px-8 py-4 underline text-[#000000] m-2"
-          >
-            VIEW GARDEN
-          </Link>
         </div>
 
-        <p className="mt-10 text-sm text-gray-500">
-          made by{" "}
+        <p className="mt-10 text-sm text-gray-500 normal-case">
+          Originally created by{" "}
           <Link
             href="https://x.com/pau_wee_"
-            className="mt-2 text-sm text-gray-500 underline"
+            className="mt-2 text-sm text-gray-500"
           >
             @pau_wee_
           </Link>
+          {", "}forked and customized by{" "}
+          <Link
+            href="https://github.com/rushhiii"
+            className="mt-2 text-sm text-gray-500"
+          >
+            @rushhiii
+          </Link>
+          .
         </p>
       </div>
     </div>
