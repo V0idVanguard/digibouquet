@@ -26,15 +26,15 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
       const sharedBouquet = JSON.parse(decoded) as BouquetType;
       const sender = sharedBouquet.letter?.sender?.trim();
       return {
-        title: sender ? `From ${sender}` : "A bouquet for you",
+        title: sender ? `digibouquet from ${sender}` : "digibouquet",
       };
     } catch {
-      return { title: "A bouquet for you" };
+      return { title: "digibouquet" };
     }
   }
 
   if (!supabase) {
-    return { title: "A bouquet for you" };
+    return { title: "digibouquet" };
   }
 
   const { data } = await supabase
@@ -45,7 +45,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 
   const sender = data?.letter?.sender?.trim();
   return {
-    title: sender ? `From ${sender}` : "A bouquet for you",
+    title: sender ? `digibouquet from ${sender}` : "digibouquet",
   };
 }
 
@@ -78,7 +78,7 @@ export default async function BouquetPage(props: Params) {
               priority
             />
           </Link>
-          <h2 className="text-lg mb-14 ">
+          <h2 className="text-3xl md:text-4xl font-dmserif mb-12 tracking-wide normal-case">
             {sharedBouquet.letter?.title?.trim() || "Hi, I made this bouquet for you!"}
           </h2>
           <Bouquet bouquet={sharedBouquet} />
@@ -135,7 +135,7 @@ export default async function BouquetPage(props: Params) {
           priority
         />
       </Link>
-      <h2 className="text-lg mb-14 ">
+      <h2 className="text-3xl md:text-4xl font-dmserif mb-12 tracking-wide normal-case">
         {data.letter?.title?.trim() || "Hi, I made this bouquet for you!"}
       </h2>
       <Bouquet bouquet={data} />

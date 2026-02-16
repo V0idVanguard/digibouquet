@@ -202,11 +202,6 @@ export default function CardWriter() {
             style={{ backgroundColor: bouquet.letter.cardColor || "#ffffff" }}
           >
             <div className="space-y-4">
-              {bouquet.letter.title ? (
-                <p className="text-left font-semibold uppercase tracking-wide">
-                  {bouquet.letter.title}
-                </p>
-              ) : null}
               <div className="flex flex-row items-left justify-left gap-2">
                 <label htmlFor="recipient">Dear </label>
                 <input

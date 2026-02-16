@@ -138,11 +138,6 @@ export default function Bouquet({ bouquet, hideFlowers }: BouquetReadOnlyProps) 
             style={{ backgroundColor: bouquet.letter.cardColor || "#ffffff" }}
           >
             <div className="space-y-4">
-              {bouquet.letter.title ? (
-                <p className="text-left font-semibold uppercase tracking-wide">
-                  {bouquet.letter.title}
-                </p>
-              ) : null}
               <div className="flex flex-row gap-2 items-start justify-start">
                 <p className="bg-transparent border-none focus:outline-none focus:ring-0">
                   Dear {bouquet.letter.recipient}

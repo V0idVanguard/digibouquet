@@ -97,7 +97,7 @@ export default function ShareBouquet() {
 
   return (
     <div className="text-center">
-      <h2 className="text-md uppercase text-center mb-10">
+      <h2 className="text-3xl md:text-4xl font-dmserif text-center mb-8 tracking-wide normal-case">
         {bouquet.letter.title?.trim() || "SEND THE BOUQUET"}
       </h2>
 
@@ -106,13 +106,13 @@ export default function ShareBouquet() {
         onClick={() => {
           handleCreateBouquet(bouquet);
         }}
-        className="uppercase text-white bg-black px-5 py-3"
+        className="mt-14 uppercase text-white bg-black px-5 py-3"
       >
         CREATE SHAREABLE LINK
       </button>
       {shareError ? <p className="mt-3 text-sm text-red-600">{shareError}</p> : null}
       {shareLink ? (
-        <div className="mx-auto mt-4 w-full max-w-xl text-left">
+        <div className="mx-auto mt-14 w-full max-w-xl text-left">
           <p className="text-xs uppercase mb-2">Share link</p>
           <input
             readOnly
